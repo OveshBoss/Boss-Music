@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inShortUrl - URL Shortener</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔗 inShortUrl</h1>
+            <p class="tagline">Shorten your URLs instantly</p>
+        </header>
+
+        <main>
+            <div class="card">
+                <form id="shortenForm">
+                    <div class="form-group">
+                        <label for="urlInput">Enter your long URL</label>
+                        <input 
+                            type="url" 
+                            id="urlInput" 
+                            placeholder="https://example.com/very/long/url/here"
+                            required
+                        >
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="customCode">Custom short code (optional)</label>
+                        <input 
+                            type="text" 
+                            id="customCode" 
+                            placeholder="mycustomcode"
+                            pattern="[a-zA-Z0-9]{3,10}"
+                            title="3-10 alphanumeric characters"
+                        >
+                        <small>Leave empty for random code</small>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary" id="shortenBtn">
+                        <span class="btn-text">Shorten URL</span>
+                        <span class="loader" style="display: none;"></span>
+                    </button>
+                </form>
+
+                <div id="result" class="result" style="display: none;">
+                    <div class="result-header">
+                        <h3>✅ URL Shortened Successfully!</h3>
+                    </div>
+                    <div class="result-content">
+                        <div class="url-display">
+                            <input type="text" id="shortUrl" readonly>
+                            <button class="btn-copy" id="copyBtn">Copy</button>
+                        </div>
+                        <div class="url-info">
+                            <p><strong>Original:</strong> <span id="originalUrl"></span></p>
+                            <p><strong>Clicks:</strong> <span id="clicks">0</span></p>
+                            <p><strong>Created:</strong> <span id="createdAt"></span></p>
+                        </div>
+                        <button class="btn-secondary" id="newUrlBtn">Shorten Another URL</button>
+                    </div>
+                </div>
+
+                <div id="error" class="error" style="display: none;">
+                    <p id="errorMessage"></p>
+                </div>
+            </div>
+
+            <div class="features">
+                <div class="feature">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Lightning Fast</h3>
+                    <p>Shorten URLs in milliseconds</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Custom Codes</h3>
+                    <p>Create memorable short links</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon">📊</div>
+                    <h3>Track Clicks</h3>
+                    <p>Monitor your link performance</p>
+                </div>
+            </div>
+
+            <div class="card recent-urls">
+                <h2>Recent URLs</h2>
+                <div id="recentList" class="recent-list">
+                    <p class="loading">Loading recent URLs...</p>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2024 inShortUrl. Made with ❤️</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
